@@ -3,5 +3,14 @@
     "editor.formatOnPaste": false,
     "editor.formatOnType": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "scss.lint.unknownAtRules": "ignore"
+    "scss.lint.unknownAtRules": "ignore",
+    "cSpell.words": [
+        "tanstack",
+        "overscan",
+        "clsx",
+        "ipfs",
+        "redblue",
+        "daisyui",
+        "tailwindcss"
+    ]
 }
