@@ -20,22 +20,22 @@ Validation을 수행하는 예제를 구성하세요. Next JS를 쓰셔도 됩�
 
 */
 
-const FORM_LIST: FormItem[] = [
+const FORM_LIST: FormItem<MemberSignUpReq>[] = [
     {
-        id: "name",
+        key: "name",
         type: "text",
         label: "회원명",
         placeholder: "이름을 입력해주세요.",
         maxLength: 20,
     },
     {
-        id: "id",
+        key: "id",
         type: "text",
         label: "아이디",
         placeholder: "휴대폰 또는 이메일",
     },
     {
-        id: "password",
+        key: "password",
         label: "패스워드",
         placeholder: "영문, 숫자, 특수문자 포함 8자 이상",
         type: "password",
@@ -60,53 +60,44 @@ export default function SignUpPage() {
         useState<MemberSignUpReq>(INIT_FORM_STATE);
 
     const handleFormFieldsChange = (
-        id: keyof MemberSignUpReq,
+        key: keyof MemberSignUpReq,
         value: string,
     ) => {
-        setFormFields({ ...formFields, [id]: value });
-        console.log(formFields);
+        setFormFields((prev) => ({ ...prev, [key]: value }));
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        Object.entries(formFields).forEach(([key, value]) => {
-            if (hasError(key as keyof MemberSignUpReq, value)) {
-                alert(ERR_MSG);
-                return;
-            }
+        // validation
+        const isInvalid = FORM_LIST.some(({ key }) => {
+            return hasError(key, formFields[key]);
         });
+        if (isInvalid) return alert(ERR_MSG);
 
-        const res = await request("member/signup", formFields);
+        const res = await request("member/sign-up", formFields);
 
-        if (res.isSignUp) {
-            alert("회원가입이 완료되었습니다.");
-        }
+        if (res.isSignUp) alert("회원가입이 완료되었습니다.");
     };
 
     return (
         <div className="py-8 max-w-mobile mx-auto px-4">
             <h1 className="mb-4 font-bold text-lg">회원가입</h1>
             <Form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-                {FORM_LIST.map(({ id, label, ...rest }) => (
-                    <Form.Item
-                        key={id}
-                        label={label}
-                        name={id}
-                        isRequired={true}
-                    >
+                {FORM_LIST.map(({ key, label, ...rest }) => (
+                    <Form.Item key={key} label={label} isRequired={true}>
                         <Input
-                            value={formFields[id]}
+                            value={formFields[key]}
                             required
-                            onRule={() => hasError(id, formFields[id])}
+                            onRule={() => hasError(key, formFields[key])}
                             onChange={(ev) =>
-                                handleFormFieldsChange(id, ev.target.value)
+                                handleFormFieldsChange(key, ev.target.value)
                             }
                             {...rest}
                         />
                     </Form.Item>
                 ))}
-                <Form.Item label="자기소개" name="introduction">
+                <Form.Item label="자기소개" key="introduction">
                     <Textarea
                         rows={INTRODUCTION_ROWS}
                         maxLength={INTRODUCTION_MAX_LENGTH}
