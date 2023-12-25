@@ -1,0 +1,25 @@
+.button {
+    @apply inline-block
+        px-4
+        py-2
+        leading-tight
+        text-white
+        border
+        border-solid
+        bg-neutral
+        bg-opacity-25
+        rounded;
+
+    &:hover {
+        @apply bg-opacity-100;
+    }
+
+    &:active {
+        @apply bg-opacity-50;
+    }
+
+    &__primary {
+        @apply bg-primary
+            bg-opacity-75;
+    }
+}
