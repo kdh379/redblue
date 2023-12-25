@@ -15,10 +15,13 @@ function isValidName(name: string): boolean {
 }
 
 function isValidId(id: string): boolean {
-    const containsAtSymbol = id.includes("@"); // 이메일 형식
-    const hasEnoughDigits = id.replace(/[^0-9]/g, "").length >= 10; // 휴대폰 형식
+    // 이메일 형식
+    const containsAtSymbol = id.includes("@");
+    // 휴대폰 번호 형식
+    const hasEnoughDigits = id.replace(/\D]/g, "").length >= 10;
+    const phonePattern = /^(01[016789])[-]?\d{3,4}[-]?\d{4}$/.test(id);
 
-    return containsAtSymbol || hasEnoughDigits;
+    return containsAtSymbol || (hasEnoughDigits && phonePattern);
 }
 
 export function hasError(id: keyof MemberSignUpReq, value: string): boolean {
