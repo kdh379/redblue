@@ -11,11 +11,14 @@ function isValidPassword(password: string): boolean {
 }
 
 function isValidName(name: string): boolean {
-    return name.length > 1 && name.length <= 20;
+    return name.length <= 20; // 20자 이하
 }
 
 function isValidId(id: string): boolean {
-    return id.includes("@") || id.includes("-");
+    const containsAtSymbol = id.includes("@"); // 이메일 형식
+    const hasEnoughDigits = id.replace(/[^0-9]/g, "").length >= 10; // 휴대폰 형식
+
+    return containsAtSymbol || hasEnoughDigits;
 }
 
 export function hasError(id: keyof MemberSignUpReq, value: string): boolean {
