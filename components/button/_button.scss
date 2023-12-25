@@ -1,5 +1,6 @@
 .button {
     @apply inline-block
+        font-bold
         px-4
         py-2
         leading-tight
@@ -19,7 +20,7 @@
     }
 
     &__primary {
-        @apply bg-primary
+        @apply bg-success
             bg-opacity-75;
     }
 }
