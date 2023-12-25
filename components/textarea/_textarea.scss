@@ -1,0 +1,14 @@
+.textarea {
+    @apply w-full
+        px-4
+        py-3
+        leading-tight
+        text-gray-700
+        border
+        border-solid
+        border-gray-300
+        rounded
+        resize-none
+        focus:outline-none
+        focus:border-blue-700;
+}
