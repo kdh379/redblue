@@ -18,7 +18,7 @@ function isValidId(id: string): boolean {
     return id.includes("@") || id.includes("-");
 }
 
-export function hasError(id: keyof MemberEntity, value: string): boolean {
+export function hasError(id: keyof MemberSignUpReq, value: string): boolean {
     switch (id) {
         case "id":
             return !isValidId(value);

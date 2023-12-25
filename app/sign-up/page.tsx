@@ -5,6 +5,7 @@ import Form, { FormItem } from "@components/form";
 import Input from "@components/input";
 import Textarea from "@components/textarea";
 import { useState } from "react";
+import request from "utils/api";
 import { hasError } from "utils/password-valid";
 
 /*
@@ -47,7 +48,7 @@ const INTRODUCTION_MAX_LENGTH = 512;
 
 const ERR_MSG = "입력값을 확인해주세요.";
 
-const INIT_FORM_STATE: MemberEntity = {
+const INIT_FORM_STATE: MemberSignUpReq = {
     name: "",
     id: "",
     password: "",
@@ -55,29 +56,32 @@ const INIT_FORM_STATE: MemberEntity = {
 };
 
 export default function SignUpPage() {
-    const [formFields, setFormFields] = useState<MemberEntity>(INIT_FORM_STATE);
+    const [formFields, setFormFields] =
+        useState<MemberSignUpReq>(INIT_FORM_STATE);
 
-    const handleFormFieldsChange = (id: string, value: string) => {
+    const handleFormFieldsChange = (
+        id: keyof MemberSignUpReq,
+        value: string,
+    ) => {
         setFormFields({ ...formFields, [id]: value });
+        console.log(formFields);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         Object.entries(formFields).forEach(([key, value]) => {
-            if (hasError(key as keyof MemberEntity, value)) {
+            if (hasError(key as keyof MemberSignUpReq, value)) {
                 alert(ERR_MSG);
                 return;
             }
         });
 
-        const response = await fetch("/api/sign-up", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formFields),
-        });
+        const res = await request("member/signup", formFields);
+
+        if (res.isSignUp) {
+            alert("회원가입이 완료되었습니다.");
+        }
     };
 
     return (
@@ -92,14 +96,11 @@ export default function SignUpPage() {
                         isRequired={true}
                     >
                         <Input
-                            required
                             value={formFields[id]}
+                            required
                             onRule={() => hasError(id, formFields[id])}
                             onChange={(ev) =>
-                                handleFormFieldsChange(
-                                    ev.target.id,
-                                    ev.target.value,
-                                )
+                                handleFormFieldsChange(id, ev.target.value)
                             }
                             {...rest}
                         />
@@ -111,7 +112,7 @@ export default function SignUpPage() {
                         maxLength={INTRODUCTION_MAX_LENGTH}
                         onChange={(ev) =>
                             handleFormFieldsChange(
-                                ev.target.id,
+                                "introduction",
                                 ev.target.value,
                             )
                         }
