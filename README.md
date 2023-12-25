@@ -11,3 +11,5 @@
 ## 구현 문제
 
 ### 2.1: [app/scrolling/page.tsx](app/scrolling/page.tsx)
+
+### 2.2: [app/sign-up/page.tsx](app/sign-up/page.tsx)
