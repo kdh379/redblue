@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ButtonHTMLAttributes, HTMLAttributes, PropsWithChildren } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -12,7 +13,9 @@ export default function Button(props: PropsWithChildren<ButtonProps>) {
 
     return (
         <button
-            className={`button ${intent && `button__${intent}`} ${className}`}
+            className={clsx("button", className, {
+                [`button__${intent}`]: intent,
+            })}
             {...rest}
         >
             {props.children}
