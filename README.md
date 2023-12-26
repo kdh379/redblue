@@ -1,5 +1,12 @@
 # REDBLUE 구현 과제
 
+## 개발 환경
+
+-   프레임 워크: Next.js 13.5.6 App Router
+-   패키지 메니저: PNPM 8.11.0
+-   API Mocking Server: MSW 2.0.11
+-   스타일링: Tailwind CSS, DaisyUI
+
 ## 주관식 문제
 
 ### 1.1 : [subjective-question/Readme.md](subjective-question/README.md)
