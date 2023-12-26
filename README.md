@@ -13,3 +13,5 @@
 ### 2.1: [app/scrolling/page.tsx](app/scrolling/page.tsx)
 
 ### 2.2: [app/sign-up/page.tsx](app/sign-up/page.tsx)
+
+### 2.3: [app/jwt-authentication/page.tsx](app/jwt-authentication/page.tsx)
