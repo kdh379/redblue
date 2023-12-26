@@ -30,7 +30,7 @@ export default function Input(props: InputProps) {
     return (
         <input
             required={required}
-            placeholder={`${placeholder}`}
+            placeholder={placeholder}
             className={clsx("input", className, {
                 "input--error": isRequiredError || isError,
             })}
