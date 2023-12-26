@@ -29,5 +29,17 @@ export const handlers = [
             });
         },
     ),
+    http.post<any, MemberAuthenticationReq, MemberAuthenticationRes>(
+        "api/authentication",
+        async ({ request }) => {
+            // TODO API 처리...
+            const { emailAddr, passCode, userType } = await request.json();
+
+            return HttpResponse.json({
+                isLogin: "true",
+                token: "eyJhbxxxxxxx",
+            });
+        },
+    ),
     http.all("*", passthrough),
 ];
