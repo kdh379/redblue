@@ -11,10 +11,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export default function Input(props: InputProps) {
     const {
         className,
-        placeholder,
-        required,
-        isError,
         value,
+        required,
+        placeholder,
+        isError,
         onRule,
         ...rest
     } = props;
@@ -29,11 +29,12 @@ export default function Input(props: InputProps) {
 
     return (
         <input
-            required={required}
-            placeholder={placeholder}
             className={clsx("input", className, {
                 "input--error": isRequiredError || isError,
             })}
+            value={value}
+            required={required}
+            placeholder={placeholder}
             onBlur={handleBlur}
             {...rest}
         ></input>

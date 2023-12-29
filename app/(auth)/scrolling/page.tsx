@@ -26,7 +26,6 @@ type Member = {
 // count 수 만큼 랜덤한 멤버 리스트를 반환
 const getMemberList = (count: number): Member[] => {
     return Array.from({ length: count }, () => {
-        console.log("getMemberList");
         return {
             name: faker.internet.userName(),
             email: faker.internet.email(),

@@ -38,5 +38,7 @@ export default async function request<T extends keyof APIInterface>(
         body: JSON.stringify(req),
     });
 
+    if (!res.ok) console.error(res);
+
     return res.json();
 }

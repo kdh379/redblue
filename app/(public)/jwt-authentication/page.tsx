@@ -3,8 +3,9 @@
 import Button from "@components/button";
 import Form, { FormItem } from "@components/form";
 import Input from "@components/input";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import request from "utils/api";
 
 /*
 2.3
@@ -27,9 +28,14 @@ const FormList: FormItem<MemberAuthenticationReq>[] = [
     },
 ];
 
-const LOGIN_MSG_BOX = {
-    fail: "ID 또는 비밀번호가 일치하지 않습니다.",
-    success: "로그인에 성공하였습니다.",
+const MSG_BOX = {
+    fail: "이메일 또는 비밀번호가 일치하지 않습니다.",
+};
+
+const TEMP_USER = {
+    userType: "U",
+    emailAddr: "kate@afoter.com",
+    passCode: "test123456!",
 };
 
 const INIT_FORM_STATE: MemberAuthenticationReq = {
@@ -39,6 +45,7 @@ const INIT_FORM_STATE: MemberAuthenticationReq = {
 };
 
 export default function JWTAuthentication() {
+    const router = useRouter();
     const [formField, setFormField] =
         useState<MemberAuthenticationReq>(INIT_FORM_STATE);
 
@@ -49,20 +56,26 @@ export default function JWTAuthentication() {
         setFormField((prev) => ({ ...prev, [key]: value }));
     };
 
+    const handleAutoComplete = () => {
+        setFormField(TEMP_USER);
+    };
+
     const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
 
-        const { isLogin, token } = await request(
-            "member/authentication",
-            formField,
-        );
+        const result = await signIn("credentials", {
+            ...formField,
+            redirect: false,
+        });
 
-        // 로그인 실패 처리
-        if (isLogin !== "true" || !token) return alert(LOGIN_MSG_BOX.fail);
-
-        // 로그인 성공 처리
-        localStorage.setItem("token", token);
-        alert(LOGIN_MSG_BOX.success);
+        if (result && !result.ok) {
+            formField.passCode = "";
+            setFormField({ ...formField });
+            alert(MSG_BOX.fail);
+        } else {
+            router.push("/");
+            router.refresh();
+        }
     };
 
     return (
@@ -80,9 +93,14 @@ export default function JWTAuthentication() {
                         />
                     </Form.Item>
                 ))}
-                <Button type="submit" className="mt-4 ml-auto" intent="primary">
-                    로그인
-                </Button>
+                <div className="ml-auto flex gap-x-3">
+                    <Button type="button" onClick={handleAutoComplete}>
+                        자동완성
+                    </Button>
+                    <Button type="submit" intent="primary">
+                        로그인
+                    </Button>
+                </div>
             </Form>
         </div>
     );

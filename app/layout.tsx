@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { initMockServer } from "../mocks";
 import "styles/globals.scss";
+import Providers from "@components/providers";
+import { getSession } from "lib/session";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,16 +17,20 @@ if (process.env.NODE_ENV === "development") {
     initMockServer();
 }
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const session = await getSession();
+
     return (
         <html lang="ko">
             <body className={inter.className}>
                 <MSWBrowser />
-                <main>{children}</main>
+                <Providers session={session}>
+                    <main>{children}</main>
+                </Providers>
             </body>
         </html>
     );

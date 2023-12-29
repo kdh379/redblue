@@ -46,7 +46,10 @@ const FORM_LIST: FormItem<MemberSignUpReq>[] = [
 const INTRODUCTION_ROWS = 3;
 const INTRODUCTION_MAX_LENGTH = 512;
 
-const ERR_MSG = "입력값을 확인해주세요.";
+const MSG_BOX = {
+    error: "입력값을 확인해주세요.",
+    success: "회원가입이 완료되었습니다.",
+};
 
 const INIT_FORM_STATE: MemberSignUpReq = {
     name: "",
@@ -73,11 +76,11 @@ export default function SignUpPage() {
         const isInvalid = FORM_LIST.some(({ key }) => {
             return hasError(key, formFields[key]);
         });
-        if (isInvalid) return alert(ERR_MSG);
+        if (isInvalid) return alert(MSG_BOX.error);
 
         const res = await request("member/sign-up", formFields);
 
-        if (res.isSignUp) alert("회원가입이 완료되었습니다.");
+        if (res.isSignUp) alert(MSG_BOX.success);
     };
 
     return (
