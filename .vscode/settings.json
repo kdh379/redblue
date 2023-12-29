@@ -11,6 +11,7 @@
         "ipfs",
         "redblue",
         "daisyui",
-        "tailwindcss"
+        "tailwindcss",
+        "NEXTAUTH"
     ]
 }
