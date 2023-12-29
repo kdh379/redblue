@@ -13,12 +13,12 @@
 
 ### 1.2 : [subjective-question/Readme.md](subjective-question/README.md)
 
-### 1.3 : [app/hybrid/page.tsx](app/hybrid/page.tsx)
+### 1.3 : [app/(public)/hybrid/page.tsx](<app/(public)/hybrid/page.tsx>)
 
 ## 구현 문제
 
-### 2.1: [app/scrolling/page.tsx](app/scrolling/page.tsx)
+### 2.1: [app/(auth)/scrolling/page.tsx](<app/(auth)/scrolling/page.tsx>)
 
-### 2.2: [app/sign-up/page.tsx](app/sign-up/page.tsx)
+### 2.2: [app/(public)/sign-up/page.tsx](<app/(public)/sign-up/page.tsx>)
 
-### 2.3: [app/jwt-authentication/page.tsx](app/jwt-authentication/page.tsx)
+### 2.3: [app/(public)/jwt-authentication/page.tsx](<app/(public)/jwt-authentication/page.tsx>)
