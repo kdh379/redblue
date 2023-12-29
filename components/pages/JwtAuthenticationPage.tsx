@@ -70,7 +70,7 @@ export default function JWTAuthenticationPage() {
 
         if (result && result.ok) {
             router.push("/");
-            router.refresh();
+            window.location.reload();
         } else {
             formField.passCode = "";
             setFormField({ ...formField });
