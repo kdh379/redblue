@@ -18,8 +18,8 @@
 
 ## 구현 문제
 
-### 2.1: [app/(auth)/scrolling/page.tsx](<app/(auth)/scrolling/page.tsx>)
+### 2.1: [components/pages/ScrollingPage.tsx](components/pages/ScrollingPage.tsx)
 
-### 2.2: [app/(public)/sign-up/page.tsx](<app/(public)/sign-up/page.tsx>)
+### 2.2: [components/pages/SignUpPage.tsx](components/pages/SignUpPage.tsx)
 
-### 2.3: [app/(public)/jwt-authentication/page.tsx](<app/(public)/jwt-authentication/page.tsx>)
+### 2.3: [components/pages/JwtAuthenticationPage.tsx](components/pages/JwtAuthenticationPage.tsx)

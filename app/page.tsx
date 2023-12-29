@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@components/button";
+import Button from "@/components/ui/button";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Link from "next/link";

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { initMockServer } from "../mocks";
 import "styles/globals.scss";
-import Providers from "@components/providers";
+import Providers from "@/components/providers";
 import { getSession } from "lib/session";
 
 const inter = Inter({ subsets: ["latin"] });
