@@ -6,6 +6,7 @@
 -   패키지 메니저: PNPM 8.11.0
 -   API Mocking Server: MSW 2.0.11
 -   스타일링: Tailwind CSS, DaisyUI
+-   인증: next-auth 4.24.5 ( JWT )
 
 ## 주관식 문제
 
